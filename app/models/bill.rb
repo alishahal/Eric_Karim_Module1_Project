@@ -1,4 +1,4 @@
-class Bill < ActiveRecord::Base[5.2]
+class Bill < ActiveRecord::Base
 	belongs_to :user
 	has_many :orders
   has_many :order_item, through: :orders
