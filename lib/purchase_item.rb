@@ -5,7 +5,7 @@ def create_order(order_item)
     user_order_item = OrderItem.find_by(order_item_name: order_item)
     user = User.find_by(name: $name_input)
     user_bill = Bill.find_or_create_by(user_id: user.id, total: 0.00)
-    user_order = Order.create(bill_id: user_bill.id, order_item_id: user_order_item.id)
+    user_order = Order.create(bill_id: user_bill.id , order_item_id: user_order_item.id)
 end
 
 def find_user_bill(name)
@@ -14,26 +14,20 @@ def find_user_bill(name)
 end
 
 def bill_items(bill)
-    # orders = []
-    # bill.orders.each do |o|
-    #     orders << o.order_item.name
-    # end
-    # orders
-    bill.orders.map{|order|order.order_item.name}
+    bill.orders.map{|order|order.order_item}
 end
 
 def get_item_description(name)
-    # item = OrderItem.find_by(order_item_name: name)
-    # item.description
-    OrderItem.find_by(order_item_name: name).description
+    x = OrderItem.find_by(order_item_name: name)
+    x.description
 end
 
 def buy_order_or_view_bill
 
-    user_choice = $prompt.select("What do you want to do?", ["Order an Entree","View my bill"])
+    user_choice = $prompt.select("What do you want to do?", ["Order an Entree", "View my bill"])
 
     if user_choice == "Order an Entree"
-        entree_choice = $prompt.select("Please select your entree!", ["Saag Paneer","Butter Chicken Curry","Sayel Lamb Curry"])
+        entree_choice = $prompt.select("Please select your entree!", ["Saag Paneer", "Butter Chicken Curry", "Sayel Lamb Curry"])
         case entree_choice
             when "Saag Paneer"
                 create_order("Saag Paneer")
@@ -51,8 +45,8 @@ def buy_order_or_view_bill
     items_array = []
 
     bill_order_items.each do |order|
-        items_array << order.order_item.order_item_name
-        bill_total += order.order_item.price
+        items_array << order.order_item_name
+        bill_total += order.price
     end
     
     if users_bill == nil
@@ -70,10 +64,11 @@ def buy_order_or_view_bill
     
     if bill_options == "Remove an item"
         if items_array.length != 0
+            
             remove_choice = $prompt.select("What would you like to remove", items_array)
             puts "Item was successfully removed :)"
 
-            removed_item = all_cart_orders.select{|o| o.order_item.order_item_name == remove_choice}.shift
+            removed_item = bill_order_items.select{|o| o.order_item.order_item_name == remove_choice}.shift
             remaining_items = bill_order_items.reject{|o| o.order_item.order_item_name if order == removed_item}
             removed_item_price = removed_item.order_item.price
 
@@ -92,7 +87,7 @@ def buy_order_or_view_bill
                 puts get_item_description("Saag Paneer")
                 buy_order_or_view_bill
             when "Butter Chicken Curry"
-                puts get_item_description("Hawaiian")
+                puts get_item_description("Butter Chicken Curry")
                 buy_order_or_view_bill
             when "Sayel Lamb Curry"
                 puts get_item_description("Sayel Lamb Curry")
