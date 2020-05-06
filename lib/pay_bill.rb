@@ -15,7 +15,7 @@ def pay
         bill_total += order.item.price
     end
 
-    users_cart.orders.clear
+    users_bill.orders.clear
     puts "placeholder thank you"
 end
 
