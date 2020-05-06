@@ -4,8 +4,8 @@ require 'pry'
 def create_order(order_item)
     user_order_item = OrderItem.find_by(order_item_name: order_item)
     user = User.find_by(name: $name_input)
-    user_bill = Bill.find_or_create_by(user_id: user.id)
-    user_order = Order.create(order_item_id: user_order_item.id, bill_id: user_bill.id)
+    user_bill = Bill.find_or_create_by(user_id: user.id, total: 0.00)
+    user_order = Order.create(bill_id: user_bill.id, order_item_id: user_order_item.id)
 end
 
 def find_user_bill(name)
@@ -14,16 +14,18 @@ def find_user_bill(name)
 end
 
 def bill_items(bill)
-    orders = []
-    bill.orders.each do |o|
-        orders << o.order_item.name
-    end
-    orders
+    # orders = []
+    # bill.orders.each do |o|
+    #     orders << o.order_item.name
+    # end
+    # orders
+    bill.orders.map{|order|order.order_item.name}
 end
 
 def get_item_description(name)
-    item = OrderItem.find_by(order_item_name: name)
-    item.description
+    # item = OrderItem.find_by(order_item_name: name)
+    # item.description
+    OrderItem.find_by(order_item_name: name).description
 end
 
 def buy_order_or_view_bill
