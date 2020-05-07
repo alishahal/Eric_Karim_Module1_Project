@@ -4,7 +4,7 @@ require 'pry'
 
 def buy_order_or_view_bill
    
-    bill_options = $prompt.select("What would you like to do?", ["Order an entree", "Could you tell me about a menu item?", "View my bill so far", "I would love to see your dessert options"])
+    bill_options = $prompt.select("What would you like to do?", ["Order an entree, please!", "Could you tell me about a menu item?", "I'd like to view my bill so far.", "I would love a treat on the house!"])
     
     if bill_options == "Could you tell me about a menu item?"
         description = $prompt.select("Select an entree!", ["Saag Paneer", "Butter Chicken Curry", "Sayel Lamb Curry"])
@@ -20,7 +20,7 @@ def buy_order_or_view_bill
                 buy_order_or_view_bill
         end
     
-    elsif bill_options == "Order an entree"
+    elsif bill_options == "Order an entree, please!"
 
         entree_choice = $prompt.select("Please select your entree!", ["Saag Paneer", "Butter Chicken Curry", "Sayel Lamb Curry"])
         case entree_choice
@@ -32,8 +32,19 @@ def buy_order_or_view_bill
                 create_order("Sayel Lamb Curry")
         end
         buy_order_or_view_bill
-    
-    elsif bill_options == "View my bill so far"
+
+    elsif bill_options == "I would love a treat on the house!"
+
+        gulab = "This is Gulab Jamun! A shockingly-sweet syrup-soaked milk ball. Cheers!"
+        ladoo = "This is a Coconut Ladoo! A tiny sphere of coconut, chopped nuts, and goodness. Cheers!"
+        ics = "This is a Bournvita Ice Cream Sandwhich. We made ice cream out of the classic malt drink for children, then smacked it in between two Parle G cookies! Yeah. It's crazy good."
+        array = [gulab,ladoo,ics]
+        puts array.sample.to_s
+        buy_order_or_view_bill
+
+
+    elsif bill_options == "I'd like to view my bill so far."
+        
         users_bill = find_user_bill($name_input)
         bill_order_items = bill_items(users_bill)
 
@@ -44,6 +55,7 @@ def buy_order_or_view_bill
             items_array << order.order_item_name
             bill_total += order.price
         end
+
         if users_bill == nil
             puts "You don't have a bill! Buy something!"
             buy_order_or_view_bill
@@ -59,3 +71,4 @@ def buy_order_or_view_bill
         end
     end
 end
+
