@@ -33,4 +33,7 @@ Our Project is about an Indian Restaurant offering a lots of mouth watering Indi
   If the customer selects the 3rd option: View my bill so far.
 		       It lists his or her total bill, and asks for wether he/she would like to pay now 
 					 or he/she wants to order something else.
+<<<<<<< HEAD
     
+=======
+>>>>>>> 2321688e24862f7ab2f566f9df4fd0e722d9f5f0
