@@ -2,6 +2,7 @@ require_relative './config/environment.rb'
 require_relative './lib/purchase_item.rb'
 require_relative './lib/pay_bill.rb'
 require_relative './lib/find_user.rb'
+require_relative './lib/get_create_functions.rb'
 
 $prompt = TTY::Prompt.new()
 
