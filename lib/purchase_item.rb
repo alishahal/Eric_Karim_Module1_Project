@@ -11,12 +11,16 @@ def buy_order_or_view_bill
         case description
             when "Saag Paneer"
                 puts get_item_description("Saag Paneer")
+                puts '13.95'
                 buy_order_or_view_bill
+                
             when "Butter Chicken Curry"
                 puts get_item_description("Butter Chicken Curry")
+                puts '15.55'
                 buy_order_or_view_bill
             when "Sayel Lamb Curry"
                 puts get_item_description("Sayel Lamb Curry")
+                puts '18.40'
                 buy_order_or_view_bill
         end
     
