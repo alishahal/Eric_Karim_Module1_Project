@@ -1,16 +1,7 @@
 require 'pry'
 
 def pay
-    #I should add something...
-
-    users_bill = find_user_bill($name_input)
-    bill_order_items = bill_items(users_bill)  
-
-    # total = 0
-    # bill_order_items.each{|order|total+=order.price}
-    # puts total.to_s
-    
-    users_bill.orders.clear
+    find_user_bill($name_input).orders.clear
     puts "Thank you so much! Have a dope day!"
 end
 
@@ -26,3 +17,12 @@ def ready_to_pay?
         end
     end
 end
+
+    #I should add something...
+
+    # users_bill = find_user_bill($name_input)
+    # bill_order_items = bill_items(users_bill)  
+
+    # total = 0
+    # bill_order_items.each{|order|total+=order.price}
+    # puts total.to_s
